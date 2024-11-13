@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createContext, ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
 import { getTheme, ThemeName } from "../style/theme.ts";
+import "sanitize.css";
 import { GlobalStyle } from "../style/global.ts";
 
 const DEFAULT_THEME_NAME = "light";

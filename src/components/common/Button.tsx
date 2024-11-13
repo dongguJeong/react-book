@@ -2,28 +2,36 @@ import React from "react";
 import { ButtonScheme, ButtonSize } from "../../style/theme";
 import styled from "styled-components";
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: ButtonSize;
   scheme: ButtonScheme;
-  disabled: boolean;
-  isLoading: boolean;
+  disabled?: boolean;
+  isLoading?: boolean;
 }
 
-const Button = ({ children, size, scheme, disabled, isLoading }: Props) => {
+const Button = ({
+  children,
+  size,
+  scheme,
+  disabled,
+  isLoading,
+  ...props
+}: Props) => {
   return (
     <ButtonStyle
       size={size}
       scheme={scheme}
       disabled={disabled}
       isLoading={isLoading}
+      {...props}
     >
       {children}
     </ButtonStyle>
   );
 };
 
-const ButtonStyle = styled.div<Omit<Props, "children">>`
+const ButtonStyle = styled.button<Omit<Props, "children">>`
   font-size: ${({ theme, size }) => theme.button[size].fontSize};
   padding: ${({ theme, size }) => theme.button[size].padding};
   color: ${({ theme, scheme }) => theme.buttonScheme[scheme].color};
@@ -34,6 +42,7 @@ const ButtonStyle = styled.div<Omit<Props, "children">>`
   opacity: ${({ disabled }) => (disabled ? "0.5" : "1")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
   cursor: ${({ disabled }) => (disabled ? "none" : "pointer")};
+  text-align: center;
 `;
 
 export default Button;

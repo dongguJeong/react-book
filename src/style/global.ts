@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import "sanitize.css";
+
 import { ThemeName } from "../style/theme";
 
 interface Props {
@@ -19,5 +19,10 @@ export const GlobalStyle = createGlobalStyle<Props>`
     }
 
     * {
-    color : ${(props) => (props.themeName === "light" ? "black" : "white")}}
+    color : ${(props) => (props.themeName === "light" ? "black" : "white")}
+    }
+
+    fieldset{
+    border : none;
+    }
 `;
