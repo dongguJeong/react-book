@@ -5,32 +5,42 @@ import InputText from "../components/common/InputText.tsx";
 import Button from "../components/common/Button.tsx";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { signUp } from "../api/auth.api.ts";
 import { useAlert } from "../hook/useAlert.ts";
+import { SignUpStyle } from "./SignUp.tsx";
+import { login } from "../api/auth.api.ts";
+import { useAuthStore } from "../store/authStore.ts";
 
-export interface SignUpProps {
+export interface LoginProps {
   email: string;
   password: string;
 }
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
+
+  const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpProps>();
-  const onSubmit = (data: SignUpProps) => {
-    console.log("1");
-    signUp(data).then((res) => {
-      showAlert("회원가입이 완료되었습니다");
-      navigate("/");
-    });
+  } = useForm<LoginProps>();
+  const onSubmit = (data: LoginProps) => {
+    login(data).then(
+      (res) => {
+        storeLogin(res.token);
+        showAlert("로그인 완료되었습니다.");
+        navigate("/");
+      },
+      (error) => {
+        showAlert("로그인이 실패했습니다");
+      }
+    );
   };
   return (
     <>
-      <Title size="large">회원가입</Title>
+      <Title size="large">로그인</Title>
       <SignUpStyle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
@@ -55,11 +65,11 @@ const SignUp = () => {
           </fieldset>
           <fieldset>
             <Button type="submit" size="medium" scheme="primary">
-              회원가입
+              로그인
             </Button>
           </fieldset>
           <div className="info">
-            <Link to="/reset">비밀번호 초기화</Link>
+            <Link to="/signup">회원가입</Link>
           </div>
         </form>
       </SignUpStyle>
@@ -67,29 +77,4 @@ const SignUp = () => {
   );
 };
 
-export const SignUpStyle = styled.div`
-    max-width : ${({ theme }) => theme.layout.width.small};
-    margin : 80px auto;
-    fieldset {
-     
-        border : none;
-        padding 0 0 8px 0;
-        .error-text {
-        color : red;
-        }
-    }
-    
-    input {
-        width : 100%;
-    }
-
-    button {
-        width : 100%;
-    }
-
-    .info {
-        text-align : center;
-        padding 16px 0 0 0;
-    }
-`;
-export default SignUp;
+export default Login;
