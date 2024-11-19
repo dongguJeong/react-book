@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "../components/common/Title.tsx";
-import styled from "styled-components";
 import InputText from "../components/common/InputText.tsx";
 import Button from "../components/common/Button.tsx";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ export interface LoginProps {
 
 const Login = () => {
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
 

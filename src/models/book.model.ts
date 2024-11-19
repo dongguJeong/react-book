@@ -9,7 +9,7 @@ export interface Book {
   pages: number;
   contents: string;
   price: number;
-  pub_date: string;
+  pubDate: string;
   category_id: number;
   img: number;
   likes: number;

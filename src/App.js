@@ -7,6 +7,10 @@ import SignUp from "./pages/SignUp.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import Login from "./pages/Login.tsx";
 import Books from "./pages/Books.tsx";
+import BookDetail from "./pages/BookDetail.tsx";
+import Cart from "./pages/Cart.tsx";
+import Order from "./pages/Order.tsx";
+import Orderlist from "./pages/Orderlist.tsx";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +54,43 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Login />
+      </Layout>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/book/:bookId",
+    element: (
+      <Layout>
+        <BookDetail />
+      </Layout>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/cart",
+    element: (
+      <Layout>
+        <Cart />
+      </Layout>
+    ),
+    errorElement: <Error />,
+  },
+  {
+    path: "/order",
+    element: (
+      <Layout>
+        <Order />
+      </Layout>
+    ),
+    errorElement: <Error />,
+  },
+
+  {
+    path: "/orderlist",
+    element: (
+      <Layout>
+        <Orderlist />
       </Layout>
     ),
     errorElement: <Error />,

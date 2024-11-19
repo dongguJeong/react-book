@@ -22,7 +22,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
     },
     (error) => {
       // 로그인 만료 처리
-      if (error.response.this.status === 401) {
+      if (error.response && error.response.status === 401) {
         removeToken();
         window.location.href = "/login";
         return;
