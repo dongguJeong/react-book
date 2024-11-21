@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
-import { Cart } from "../../models/cart.model.ts";
-import Button from "../../components/common/Button.tsx";
-import Title from "../common/Title.tsx";
-import { formatNumber } from "../../utils/format.ts";
-import CheckIconButton from "./CheckIconButton.tsx";
-import { useAlert } from "../../hook/useAlert.ts";
+import { Cart } from "../../models/cart.model";
+import Button from "../../components/common/Button";
+import Title from "../common/Title";
+import { formatNumber } from "../../utils/format";
+import CheckIconButton from "./CheckIconButton";
+import { useAlert } from "../../hook/useAlert";
 
 interface Props {
   cart: Cart;

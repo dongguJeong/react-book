@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useCategory } from "../../hook/useCategory.ts";
-import Button from "../common/Button.tsx";
+import { useCategory } from "../../hook/useCategory";
+import Button from "../common/Button";
 import { useSearchParams } from "react-router-dom";
-import { QUERYSTRING } from "../../constants/querystring.ts";
+import { QUERYSTRING } from "../../constants/querystring";
 
 const BooksFilter = () => {
   const { category } = useCategory();

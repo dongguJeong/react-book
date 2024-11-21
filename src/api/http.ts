@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { getToken, removeToken } from "../store/authStore.ts";
+import { getToken, removeToken } from "../store/authStore";
 
 const BASE_URL = "http://localhost:9999";
 const DEFAULT_TIMEOUT = 30000;
@@ -35,3 +35,26 @@ export const createClient = (config?: AxiosRequestConfig) => {
 };
 
 export const httpClient = createClient();
+type RequestMethod = "get" | "post" | "put" | "delete";
+export const requestHandler = async <T>(
+  method: RequestMethod,
+  url: string,
+  payload?: T
+) => {
+  let response;
+  switch (method) {
+    case "post":
+      response = await httpClient[method](url, payload);
+      break;
+    case "get":
+      response = await httpClient[method](url);
+      break;
+    case "put":
+      response = await httpClient[method](url, payload);
+      break;
+    case "delete":
+      response = await httpClient[method](url);
+      break;
+  }
+  return response.data;
+};

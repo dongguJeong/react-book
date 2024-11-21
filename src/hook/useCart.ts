@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Cart } from "../models/cart.model.ts";
-import { deleteCart, fetchCart } from "../api/carts.api.ts";
+import { Cart } from "../models/cart.model";
+import { deleteCart, fetchCart } from "../api/carts.api";
 
 export const useCart = () => {
   const [carts, setCarts] = useState<Cart[]>([]);

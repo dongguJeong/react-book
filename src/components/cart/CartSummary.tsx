@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { formatNumber } from "../../utils/format.ts";
+import { formatNumber } from "../../utils/format";
 
 interface Props {
   totalQuantity: number;

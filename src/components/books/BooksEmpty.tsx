@@ -1,7 +1,7 @@
 import React from "react";
 import { FaSmileWink } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Empty from "../common/Empty.tsx";
+import Empty from "../common/Empty";
 
 const BooksEmpty = () => {
   return (

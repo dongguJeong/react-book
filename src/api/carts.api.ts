@@ -1,5 +1,5 @@
-import { Cart } from "../models/cart.model.ts";
-import { httpClient } from "./http.ts";
+import { Cart } from "../models/cart.model";
+import { httpClient } from "./http";
 
 interface Props {
   book_id: number;

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Title from "../components/common/Title.tsx";
-import { useOrders } from "../hook/useOrders.ts";
-import { formatDate, formatNumber } from "../utils/format.ts";
-import Button from "../components/common/Button.tsx";
+import Title from "../components/common/Title";
+import { useOrders } from "../hook/useOrders";
+import { formatDate, formatNumber } from "../utils/format";
+import Button from "../components/common/Button";
 
 const Orderlist = () => {
   const { orders } = useOrders();
@@ -29,7 +29,7 @@ const Orderlist = () => {
           <tbody>
             {orders.map((order) => (
               <React.Fragment key={order.id}>
-                <tr >
+                <tr>
                   <td>{order.id}</td>
                   <td>{formatDate(order.createdAt, "YYYY.MM.DD")}</td>
                   <td>{order.address}</td>
@@ -68,7 +68,7 @@ const Orderlist = () => {
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>

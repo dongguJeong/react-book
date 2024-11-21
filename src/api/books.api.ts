@@ -1,6 +1,6 @@
-import { Book, BookDetail } from "../models/book.model.ts";
-import { Pagination } from "../models/pagination.model.ts";
-import { httpClient } from "./http.ts";
+import { Book, BookDetail } from "../models/book.model";
+import { Pagination } from "../models/pagination.model";
+import { httpClient } from "./http";
 
 interface FetchBooksParams {
   category_id?: number;
@@ -43,5 +43,10 @@ export const likeBook = async (bookId: number) => {
 
 export const unlikeBook = async (bookId: number) => {
   const response = await httpClient.delete(`/likes/${bookId}`);
+  return response.data;
+};
+
+export const fetchBestBook = async () => {
+  const response = await httpClient.get<Book[]>(`/books/best`);
   return response.data;
 };

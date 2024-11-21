@@ -1,8 +1,9 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { getByAltText, render, screen } from "@testing-library/react";
-import BookItem from "./BookItem.tsx";
-import { BookStoreThemeProvider } from "../../context/themeContext.tsx";
+import BookItem from "./BookItem";
+import { BookStoreThemeProvider } from "../../context/themeContext";
+import { Book } from "@/models/book.model";
 
 const dummyBooks: Book = {
   id: 1,
@@ -16,8 +17,8 @@ const dummyBooks: Book = {
   pages: 550,
   contents:
     "Introduction, Basics of Programming, Advanced Techniques, Algorithms, Final Thoughts",
-  price: "39,900원",
-  pub_date: "2022-05-15",
+  price: 39900,
+  pubDate: "2022-05-15",
   category_id: 1,
   img: 1,
   likes: 120,
@@ -30,9 +31,9 @@ describe("BookItem Test", () => {
         <BookItem book={dummyBooks} />
       </BookStoreThemeProvider>
     );
-    expect(getByText(dummyBooks.title)).toBeInTheDocument();
-    expect(getByText(dummyBooks.summary)).toBeInTheDocument();
-    expect(getByText(dummyBooks.author)).toBeInTheDocument();
+    expect(screen.getByText(dummyBooks.title)).toBeInTheDocument();
+    expect(screen.getByText(dummyBooks.summary)).toBeInTheDocument();
+    expect(screen.getByText(dummyBooks.author)).toBeInTheDocument();
     // expect(getByAltText(dummyBooks.title)).toHaveAttribute(
     //   "src",
     //   `https://picsum.photos/id/${dummyBooks.img}/600/600`

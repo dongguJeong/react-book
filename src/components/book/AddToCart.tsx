@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { BookDetail } from "../../models/book.model";
-import InputText from "../common/InputText.tsx";
-import Button from "../common/Button.tsx";
-import { addCart } from "../../api/carts.api.ts";
-import { useAlert } from "../../hook/useAlert.ts";
+import InputText from "../common/InputText";
+import Button from "../common/Button";
 import { Link } from "react-router-dom";
-import { useBook } from "../../hook/useBook.ts";
+import { useBook } from "../../hook/useBook";
 
 interface Props {
   book: BookDetail;

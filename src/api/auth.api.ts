@@ -1,12 +1,12 @@
-import { SignUpProps } from "../pages/SignUp.tsx";
-import { httpClient } from "./http.ts";
+import { SignUpProps } from "../pages/SignUp";
+import { httpClient } from "./http";
 
 export const signUp = async (userData: SignUpProps) => {
   const response = await httpClient.post("/users/join", userData);
   return response.data;
 };
 
-export const resetRequset = async (data: SignUpProps) => {
+export const resetRequest = async (data: SignUpProps) => {
   const response = await httpClient.post("/users/reset", data);
   return response.data;
 };

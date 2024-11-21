@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import logo from "../../asset/images/logo.png";
-import { FaSignInAlt, FaRegUser } from "react-icons/fa";
-import { useCategory } from "../../hook/useCategory.ts";
-import { useAuthStore } from "../../store/authStore.ts";
+import logo from "@/asset/images/logo.png";
+import {
+  FaSignInAlt,
+  FaRegUser,
+  FaUserCircle,
+  FaHamburger,
+  FaBars,
+  FaAngleRight,
+} from "react-icons/fa";
+import { useCategory } from "../../hook/useCategory";
+import { useAuthStore } from "../../store/authStore";
+import Dropdown from "./Dropdown";
+import ThemeSwitcher from "../header/ThemeSwitcher";
 
 const Header = () => {
   const { category } = useCategory();
   const { isloggedIn, storeLogin, storeLogout } = useAuthStore();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
-    <HeaderStyle>
+    <HeaderStyle $isMobileOpen={isMobileOpen}>
       <h1 className="logo">
         <Link to="/">
           <img src={logo} alt="book store" />
         </Link>
       </h1>
       <nav className="category">
+        <button
+          className="menu-button"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+        >
+          {isMobileOpen ? <FaAngleRight /> : <FaBars />}
+        </button>
         <ul>
           {category.map((item) => (
             <li key={item.category_id}>
@@ -35,19 +51,24 @@ const Header = () => {
         </ul>
       </nav>
       <nav className="auth">
-        {isloggedIn && (
-          <ul>
-            <li>
-              <Link to="/cart">장바구니</Link>
-            </li>
-            <li>
-              <Link to="/orderlist">주문 내역</Link>
-            </li>
-            <li>
-              <button onClick={storeLogout}>로그아웃</button>
-            </li>
-          </ul>
-        )}
+        <Dropdown toggleButton={<FaUserCircle />}>
+          <>
+            {isloggedIn && (
+              <ul>
+                <li>
+                  <Link to="/cart">장바구니</Link>
+                </li>
+                <li>
+                  <Link to="/orderlist">주문 내역</Link>
+                </li>
+                <li>
+                  <button onClick={storeLogout}>로그아웃</button>
+                </li>
+              </ul>
+            )}
+            <ThemeSwitcher />
+          </>
+        </Dropdown>
 
         {!isloggedIn && (
           <ul>
@@ -70,9 +91,13 @@ const Header = () => {
   );
 };
 
-const HeaderStyle = styled.header`
+interface HeaderStyleProps {
+  $isMobileOpen: boolean;
+}
+const HeaderStyle = styled.header<HeaderStyleProps>`
   width: 100%;
   margin: 0 auto;
+
   max-width: ${({ theme }) => theme.layout.width.large};
   display: flex;
   justify-content: space-between;
@@ -87,6 +112,10 @@ const HeaderStyle = styled.header`
   }
 
   .category {
+    .menu-button {
+      display: none;
+    }
+
     ul {
       display: flex;
       gap: 32px;
@@ -108,7 +137,11 @@ const HeaderStyle = styled.header`
   .auth {
     ul {
       display: flex;
+      flex-direction: column;
       gap: 16px;
+      width: 100px;
+      align-items: center;
+      justify-content: start;
       li {
         a,
         button {
@@ -126,6 +159,51 @@ const HeaderStyle = styled.header`
             margin-right: 6px;
           }
         }
+      }
+    }
+  }
+
+  @media screen AND ${({ theme }) => theme.mediaQuery.mobile} {
+    .logo {
+      padding: 0 0 0 12px;
+
+      img {
+        width: 140px;
+      }
+    }
+
+    .auth {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .category {
+      .menu-button {
+        display: flex;
+        position: absolute;
+        top: 14px;
+        right: ${({ $isMobileOpen }) => ($isMobileOpen ? "62%" : "52px")};
+        background: #fff;
+        border: 0;
+        font-size: 1.5rem;
+      }
+
+      ul {
+        position: fixed;
+        top: 0;
+        right: ${({ $isMobileOpen }) => ($isMobileOpen ? "0" : "-100%")};
+        width: 60%;
+        height: 100vh;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+        margin: 0;
+        padding: 24px;
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        flex-direction: column;
+        gap: 16px;
       }
     }
   }

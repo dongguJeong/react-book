@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { BookStoreThemeProvider } from "../../context/themeContext.tsx";
+import { BookStoreThemeProvider } from "../../context/themeContext";
 import "@testing-library/jest-dom";
-import InputText from "./InputText.tsx";
+import InputText from "./InputText";
 
 describe("Title 컴포넌트 테스트", () => {
   it("렌더를 확인합니다", () => {

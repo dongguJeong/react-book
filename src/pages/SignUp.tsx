@@ -1,12 +1,11 @@
 import React from "react";
-import Title from "../components/common/Title.tsx";
+import Title from "../components/common/Title";
 import styled from "styled-components";
-import InputText from "../components/common/InputText.tsx";
-import Button from "../components/common/Button.tsx";
-import { Link, useNavigate } from "react-router-dom";
+import InputText from "../components/common/InputText";
+import Button from "../components/common/Button";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { signUp } from "../api/auth.api.ts";
-import { useAlert } from "../hook/useAlert.ts";
+import { useAuth } from "@/hook/useAuth";
 
 export interface SignUpProps {
   email: string;
@@ -14,20 +13,18 @@ export interface SignUpProps {
 }
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
+  const { userSignUp } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpProps>();
+
   const onSubmit = (data: SignUpProps) => {
-    console.log("1");
-    signUp(data).then((res) => {
-      showAlert("회원가입이 완료되었습니다");
-      navigate("/");
-    });
+    userSignUp(data);
   };
+
   return (
     <>
       <Title size="large">회원가입</Title>

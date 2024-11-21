@@ -10,7 +10,7 @@ export type HeadingSize = "large" | "medium" | "small";
 export type ButtonSize = "large" | "medium" | "small";
 export type ButtonScheme = "primary" | "normal" | "like";
 export type LayoutWidth = "large" | "medium" | "small";
-
+export type MediaQuery = "mobile" | "tablet" | "desktop";
 interface Theme {
   name: ThemeName;
   color: Record<ColorKey, string>;
@@ -39,12 +39,16 @@ interface Theme {
       [key in LayoutWidth]: string;
     };
   };
+
+  mediaQuery: {
+    [key in MediaQuery]: string;
+  };
 }
 
 export const light: Theme = {
   name: "light",
   color: {
-    primary: "brown",
+    primary: "orange",
     background: "lightgray",
     secondary: "gray",
     third: "green",
@@ -99,6 +103,11 @@ export const light: Theme = {
       medium: "760px",
       small: "320px",
     },
+  },
+  mediaQuery: {
+    mobile: "(max-width : 768px)", // 768 이하
+    tablet: "(max-width : 1024px)", // 1024 이하
+    desktop: "(min-width : 1025px)", // 1025 이상
   },
 };
 

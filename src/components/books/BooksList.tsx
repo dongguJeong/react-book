@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import BookItem from "./BookItem.tsx";
-import { Book } from "../../models/book.model.ts";
+import BookItem from "./BookItem";
+import { Book } from "../../models/book.model";
 import { useLocation } from "react-router-dom";
-import { QUERYSTRING } from "../../constants/querystring.ts";
-import { ViewMode } from "./BooksViewSwitcher.tsx";
+import { QUERYSTRING } from "../../constants/querystring";
+import { ViewMode } from "./BooksViewSwitcher";
 
 interface Props {
   books: Book[];

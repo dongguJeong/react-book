@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Button from "../common/Button.tsx";
+import Button from "../common/Button";
 
 interface Props {
   onCompleted: (address: string) => void;

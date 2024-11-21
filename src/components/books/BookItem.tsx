@@ -1,10 +1,10 @@
 import React from "react";
-import { Book } from "../../models/book.model";
+import { Book } from "@/models/book.model";
 import styled from "styled-components";
-import { getImgSrc } from "../../utils/image.ts";
-import { formatNumber } from "../../utils/format.ts";
+import { getImgSrc } from "@/utils/image";
+import { formatNumber } from "@/utils/format";
 import { FaHeart } from "react-icons/fa";
-import { ViewMode } from "./BooksViewSwitcher.tsx";
+import { ViewMode } from "@/components/books/BooksViewSwitcher";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -36,7 +36,7 @@ const BookItem = ({ book, view }: Props) => {
   );
 };
 
-const BookItemStyle = styled.div<Pick<Props, "view">>`
+export const BookItemStyle = styled.div<Pick<Props, "view">>`
   a{
     display : flex;
     flex-direction :${({ view }) => (view === "grid" ? "column" : "row")};

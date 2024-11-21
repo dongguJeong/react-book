@@ -1,7 +1,7 @@
 import React from "react";
 import { FaSmileWink } from "react-icons/fa";
 import styled from "styled-components";
-import Title from "../common/Title.tsx";
+import Title from "../common/Title";
 
 interface Props {
   icon?: React.ReactNode;

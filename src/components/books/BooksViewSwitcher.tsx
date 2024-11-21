@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Button from "../common/Button.tsx";
+import Button from "@/components/common/Button";
 import { FaList, FaTh } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
-import { QUERYSTRING } from "../../constants/querystring.ts";
+import { QUERYSTRING } from "@/constants/querystring";
 
-const viewOptions = [
+const viewOptions: { value: ViewMode; icon: JSX.Element }[] = [
   {
     value: "list",
     icon: <FaList />,

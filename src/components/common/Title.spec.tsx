@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Title from "./Title.tsx";
-import { BookStoreThemeProvider } from "../../context/themeContext.tsx";
+import Title from "./Title";
+import { BookStoreThemeProvider } from "../../context/themeContext";
 import "@testing-library/jest-dom";
 
 describe("Title 컴포넌트 테스트", () => {

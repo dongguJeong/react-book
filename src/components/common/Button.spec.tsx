@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Title from "./Title.tsx";
-import { BookStoreThemeProvider } from "../../context/themeContext.tsx";
+import Title from "./Title";
+import { BookStoreThemeProvider } from "../../context/themeContext";
 import "@testing-library/jest-dom";
-import Button from "./Button.tsx";
+import Button from "./Button";
 
 describe("Title 컴포넌트 테스트", () => {
   it("렌더를 확인합니다", () => {

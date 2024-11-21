@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { useBook } from "../hook/useBook.ts";
-import { getImgSrc } from "../utils/image.ts";
-import Title from "../components/common/Title.tsx";
-import { BookDetail as IBookDetail } from "../models/book.model.ts";
-import { formatDate, formatNumber } from "../utils/format.ts";
+import { useBook } from "../hook/useBook";
+import { getImgSrc } from "../utils/image";
+import Title from "../components/common/Title";
+import { BookDetail as IBookDetail } from "../models/book.model";
+import { formatDate, formatNumber } from "../utils/format";
 import { Link } from "react-router-dom";
-import EllipsisBox from "../components/common/EllipsisBox.tsx";
-import LikeButton from "../components/book/LikeButton.tsx";
-import AddToCart from "../components/book/AddToCart.tsx";
+import EllipsisBox from "../components/common/EllipsisBox";
+import LikeButton from "../components/book/LikeButton";
+import AddToCart from "../components/book/AddToCart";
+import BookReview from "@/components/book/BookReview";
+import { Tab, Tabs } from "@/components/common/Tabs";
+import Modal from "@/components/Modal";
 
 const bookInfoList = [
   {
@@ -53,12 +56,25 @@ const bookInfoList = [
 
 const BookDetail = () => {
   const { bookId } = useParams();
-  const { book, likeToggle, cartAdded } = useBook(bookId);
+  const { book, likeToggle, reviews, addReview } = useBook(bookId);
+  const [isImgOpen, setIsImgOpen] = useState(false);
+
   if (!book) return null;
+
   return (
     <BookDetailStyle>
       <header className="header">
-        <img src={getImgSrc(book.img)} alt={book.title} />
+        <img
+          src={getImgSrc(book.img)}
+          alt={book.title}
+          onClick={() => setIsImgOpen(true)}
+        />
+        <div>
+          <Modal isOpen={isImgOpen} onClose={() => setIsImgOpen(false)}>
+            <img src={getImgSrc(book.img)} alt={book.title} />
+          </Modal>
+        </div>
+
         <div className="info">
           <Title size="large" color="text">
             {book.title}
@@ -84,14 +100,26 @@ const BookDetail = () => {
         </div>
       </header>
       <div className="content">
-        <Title size="large" color="text">
-          상세설명
-        </Title>
-        <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
-        <Title size="large" color="text">
-          목차
-        </Title>
-        <p className="index">{book.contents}</p>
+        <Tabs>
+          <Tab title="상세 설명">
+            <Title size="large" color="text">
+              상세설명
+            </Title>
+            <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
+          </Tab>
+          <Tab title="목차">
+            <Title size="medium" color="text">
+              목차
+            </Title>
+            <p className="index">{book.contents}</p>
+          </Tab>
+          <Tab title="리뷰">
+            <Title size="medium" color="text">
+              리뷰
+            </Title>
+            <BookReview reviews={reviews} onAdd={addReview} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDetailStyle>
   );
@@ -103,6 +131,10 @@ const BookDetailStyle = styled.div`
     align-items: start;
     gap: 24px;
     padding: 0 0 24px 0;
+
+    > div {
+      position: relative !important;
+    }
 
     .img {
       flex: 1;

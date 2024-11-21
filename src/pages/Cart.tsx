@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import Title from "../components/common/Title.tsx";
-import { useCart } from "../hook/useCart.ts";
-import CartItem from "../components/cart/CartItem.tsx";
-import Empty from "../components/common/Empty.tsx";
+import Title from "../components/common/Title";
+import { useCart } from "../hook/useCart";
+import CartItem from "../components/cart/CartItem";
+import Empty from "../components/common/Empty";
 import { FaShoppingCart } from "react-icons/fa";
-import CartSummary from "../components/cart/CartSummary.tsx";
-import Button from "../components/common/Button.tsx";
-import { useAlert } from "../hook/useAlert.ts";
-import { OrderSheet } from "../models/order.model.ts";
+import CartSummary from "../components/cart/CartSummary";
+import Button from "../components/common/Button";
+import { useAlert } from "../hook/useAlert";
+import { OrderSheet } from "../models/order.model";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
